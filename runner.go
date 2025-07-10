@@ -24,12 +24,11 @@ func (c *client) doRequest() {
 		bd = bytes.NewReader(c.reqbody)
 	}
 
-	url := c.url
 	if len(c.query) > 0 {
-		url += "?" + c.query.Encode()
+		c.url += "?" + c.query.Encode()
 	}
 
-	req, err := http.NewRequest(c.method, url, bd)
+	req, err := http.NewRequestWithContext(c.ctx, c.method, c.url, bd)
 	if err != nil {
 		c.err = err
 		return
