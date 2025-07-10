@@ -35,6 +35,9 @@ type _TTPResponse interface {
 type TTPContext interface {
 	_TTPRequestModifiers
 	_TTPResponse
+	Url() string
+	Query() url.Values
+
 	Next()
 }
 
